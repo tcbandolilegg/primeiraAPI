@@ -14,10 +14,14 @@ app.listen(port, () => {
 
 const index = require('./src/routes/index')
 const users = require('./src/routes/usersRoutes')
-const notebook = require('./src/routes/notebookRoutes')
-const notebook = require('./src/routes/notebookRoutes')
-const notebook = require('./src/routes/notebookRoutes')
+const notebooks = require('./src/routes/notebooksRoutes')
+const categories = require('./src/routes/categoriesRoutes')
+const blogs = require('./src/routes/blogsRoutes')
 
 
 app.use("/", index);
 app.use("/users", users);
+app.use("/notebooks", notebooks);
+app.use("/categories", categories);
+app.use("/blogs", blogs);
+
