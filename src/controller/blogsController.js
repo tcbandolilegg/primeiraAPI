@@ -1,4 +1,4 @@
-const blogs = require('https://drive.google.com/file/d/1XNw3CVv3iYxuHYh76MgXI70VaTnyhozy/view?usp=sharing')
+const blogs = require('../modal/dataBlogs.json')
 const fs = require('fs')
 
 
@@ -23,7 +23,7 @@ const searchBlogForId = (request, response) => {
 
 const saveBlog = (request, response) => {
 
-  const novoId = request.body.cpf + date()
+  const novoId = Date()
   const novoUsuario = request.body
 
   blogs.push(

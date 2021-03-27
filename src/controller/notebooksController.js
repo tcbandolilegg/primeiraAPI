@@ -1,4 +1,5 @@
-const notebooks = require('https://drive.google.com/file/d/1nUykaIJKacg7IQqtYyl6uo3LmIugayZM/view?usp=sharing')
+
+const notebooks = require('../modal/dataNotebooks.json')
 const fs = require('fs')
 
 
@@ -23,7 +24,7 @@ const searchNotebookForId = (request, response) => {
 
 const saveNotebook = (request, response) => {
 
-  const novoId = request.body.cpf + date()
+  const novoId = Date()
   const novoUsuario = request.body
 
   notebooks.push(

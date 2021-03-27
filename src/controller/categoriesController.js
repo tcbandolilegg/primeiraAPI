@@ -1,4 +1,4 @@
-const categories = require('https://drive.google.com/file/d/1CIqbf8jA8B0uue8rggM0OzAbfXFOKrah/view?usp=sharing');
+const categories = require('../modal/dataCategories.json');
 const fs = require('fs');
 
 
@@ -23,7 +23,7 @@ const searchCategoryForId = (request, response) => {
 
 const saveCategory = (request, response) => {
 
-  const novoId = request.body.cpf + date()
+  const novoId = Date()
   const novoUsuario = request.body
 
   categories.push(

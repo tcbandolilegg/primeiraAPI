@@ -1,4 +1,4 @@
-const users = require('https://drive.google.com/file/d/1CdhQ5kRBI3Tul1Qxjo4q6coIVrKFrw3c/view?usp=sharing')
+const users = require('../modal/dataUsers.json');
 const fs = require('fs')
 
 
@@ -21,7 +21,7 @@ const searchUserForId = (request, response) => {
 
 const saveUser = (request, response) => {
 
-  const novoId = request.body.cpf + date()
+  const novoId = Date()
   const novoUsuario = request.body
 
   users.push(

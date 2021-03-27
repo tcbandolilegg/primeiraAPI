@@ -1,4 +1,4 @@
-const recipes = require('https://drive.google.com/file/d/1l0vIsB2evUPXBdEH6FZLFdXFrtNRZCna/view?usp=sharing')
+const recipes = require('../modal/dataRecipes')
 const fs = require('fs')
 
 
@@ -23,7 +23,7 @@ const searchRecipeForId = (request, response) => {
 
 const saveRecipe = (request, response) => {
 
-  const novoId = request.body.cpf + date()
+  const novoId = Date()
   const novoUsuario = request.body
 
   recipes.push(
