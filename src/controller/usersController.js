@@ -1,15 +1,15 @@
-const users = require('../modal/users.json');
+const users = require('../modal/dataUsers.json');
 // const express = require('express');
 const fs = require('fs');
 
 
-const listarTodosUsers = (_, response) => {
+const allUsers = (_, response) => {
   response.send(users);
 };
 
 
 // request é o que vem do HTTP pra o servidor como uma pergunta através da rota
-const pesquisaPorId = (request, response) => {
+const searchUserForId = (request, response) => {
   const userEncontrado = users.filter((user) => {
     return user.id === Number(request.params.id)
   })
@@ -22,7 +22,7 @@ const pesquisaPorId = (request, response) => {
 
 };
 
-const salvarUser = (request, response) => {
+const saveUser = (request, response) => {
 
   const novoId = request.body.cpf + date()
   const novoUsuario = request.body
@@ -35,7 +35,7 @@ const salvarUser = (request, response) => {
 };
 
 
-const apagarUser = (request, response) => {
+const deleteUser = (request, response) => {
   const userEncontrado = users.filter((user) => {
     return user.id === Number(request.params.id)
   })
@@ -51,4 +51,24 @@ const apagarUser = (request, response) => {
 
 }
 
-module.exports = { listarTodosUsers, pesquisaPorId, salvarUser, apagarUser }
+
+
+const upDateUser = (request, response) => {
+
+  const userEncontrado = users.filter((user) => {
+    return user.id === Number(request.params.id)
+  })
+  if (userEncontrado.length > 0) {
+    posicao = userEncontrado.indexOf(userEncontrado.id);
+    const novoId = userEncontrado.id
+    users.splice(posicao, 1);
+    const novoUser = request.body
+    users.push(
+      { id: novoId, ...novoUser }
+    )
+    fs.writeFile("./scr/modal/dataUsers.json", JSON.stringify(users), (err) => { console.log(err) })
+    response.status(201).send("User incluido")
+  };
+}
+
+module.exports = { allUsers, searchUserForId, saveUser, deleteUser, upDateUser }
