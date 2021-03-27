@@ -30,7 +30,7 @@ const saveNotebook = (request, response) => {
   notebooks.push(
     { id: novoId, ...novoUsuario }
   )
-  fs.writeFile(`${notebooks}`, JSON.stringify(notebooks), (err) => { console.log(err) })
+  fs.writeFile(`${notebooks}`, JSON.stringify(notebooks), (err) => { console.log('erro fs write notebook', err) })
   response.status(201).send("Notebook incluido")
 };
 
@@ -42,7 +42,7 @@ const deleteNotebook = (request, response) => {
   if (notebookEncontrado.length > 0) {
     posicao = notebookEncontrado.indexOf(notebookEncontrado.id);
     notebooks.splice(posicao, 1);
-    fs.writeFile(`${notebooks}`, JSON.stringify(notebooks), (err) => { console.log(err) })
+    fs.writeFile(`${notebooks}`, JSON.stringify(notebooks), (err) => { console.log('erro fs write notebook', err) })
     response.status(200).send("Usuário Excluído")
 
   } else {
@@ -66,7 +66,7 @@ const upDateNotebook = (request, response) => {
     notebooks.push(
       { id: novoId, ...novoNotebook }
     )
-    fs.writeFile(`${notebooks}`, JSON.stringify(notebooks), (err) => { console.log(err) })
+    fs.writeFile(`${notebooks}`, JSON.stringify(notebooks), (err) => { console.log('erro fs write notebook', err) })
     response.status(201).send("Notebook incluido")
   };
 }

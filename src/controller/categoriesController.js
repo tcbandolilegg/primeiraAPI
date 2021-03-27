@@ -29,7 +29,7 @@ const saveCategory = (request, response) => {
   categories.push(
     { id: novoId, ...novoUsuario }
   )
-  fs.writeFile(`${categories}`, JSON.stringify(categories), (err) => { console.log(err) })
+  fs.writeFile(`${categories}`, JSON.stringify(categories), (err) => { console.log('erro fs write categiras', err) })
   response.status(201).send("Category incluido")
 };
 
@@ -41,7 +41,7 @@ const deleteCategory = (request, response) => {
   if (categoryEncontrado.length > 0) {
     posicao = categoryEncontrado.indexOf(categoryEncontrado.id);
     categories.splice(posicao, 1);
-    fs.writeFile(`${categories}`, JSON.stringify(categories), (err) => { console.log(err) })
+    fs.writeFile(`${categories}`, JSON.stringify(categories), (err) => { console.log('erro fs write categorias', err) })
     response.status(200).send("Usuário Excluído")
 
   } else {
@@ -65,7 +65,7 @@ const upDateCategory = (request, response) => {
     categories.push(
       { id: novoId, ...novoCategory }
     )
-    fs.writeFile(`${categories}`, JSON.stringify(categories), (err) => { console.log(err) })
+    fs.writeFile(`${categories}`, JSON.stringify(categories), (err) => { console.log('erro fs write categorias', err) })
     response.status(201).send("Category incluido")
   };
 }

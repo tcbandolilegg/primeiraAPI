@@ -27,7 +27,7 @@ const saveUser = (request, response) => {
   users.push(
     { id: novoId, ...novoUsuario }
   )
-  fs.writeFile(`${users}`, JSON.stringify(users), (err) => { console.log(err) })
+  fs.writeFile(`${users}`, JSON.stringify(users), (err) => { console.log('erro fs write users', err) })
   response.status(201).send("User incluido")
 };
 
@@ -39,7 +39,7 @@ const deleteUser = (request, response) => {
   if (userEncontrado.length > 0) {
     posicao = userEncontrado.indexOf(userEncontrado.id);
     users.splice(posicao, 1);
-    fs.writeFile(`${users}`, JSON.stringify(users), (err) => { console.log(err) })
+    fs.writeFile(`${users}`, JSON.stringify(users), (err) => { console.log('erro fs write users', err) })
     response.status(200).send("Usuário Excluído")
 
   } else {
@@ -61,7 +61,7 @@ const upDateUser = (request, response) => {
     users.push(
       { id: novoId, ...novoUser }
     )
-    fs.writeFile(`${users}`, JSON.stringify(users), (err) => { console.log(err) })
+    fs.writeFile(`${users}`, JSON.stringify(users), (err) => { console.log('erro fs write users', err) })
     response.status(201).send("User incluido")
   };
 }
