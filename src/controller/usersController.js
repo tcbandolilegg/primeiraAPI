@@ -1,14 +1,11 @@
-const users = require('../modal/dataUsers.json');
-// const express = require('express');
-const fs = require('fs');
+const users = require('https://drive.google.com/file/d/1CdhQ5kRBI3Tul1Qxjo4q6coIVrKFrw3c/view?usp=sharing')
+const fs = require('fs')
 
 
 const allUsers = (_, response) => {
   response.send(users);
 };
 
-
-// request é o que vem do HTTP pra o servidor como uma pergunta através da rota
 const searchUserForId = (request, response) => {
   const userEncontrado = users.filter((user) => {
     return user.id === Number(request.params.id)
@@ -30,7 +27,7 @@ const saveUser = (request, response) => {
   users.push(
     { id: novoId, ...novoUsuario }
   )
-  fs.writeFile("./scr/modal/users.json", JSON.stringify(users), (err) => { console.log(err) })
+  fs.writeFile(`${users}`, JSON.stringify(users), (err) => { console.log(err) })
   response.status(201).send("User incluido")
 };
 
@@ -42,7 +39,7 @@ const deleteUser = (request, response) => {
   if (userEncontrado.length > 0) {
     posicao = userEncontrado.indexOf(userEncontrado.id);
     users.splice(posicao, 1);
-    fs.writeFile("./scr/modal/users.json", JSON.stringify(users), (err) => { console.log(err) })
+    fs.writeFile(`${users}`, JSON.stringify(users), (err) => { console.log(err) })
     response.status(200).send("Usuário Excluído")
 
   } else {
@@ -50,8 +47,6 @@ const deleteUser = (request, response) => {
   }
 
 }
-
-
 
 const upDateUser = (request, response) => {
 
@@ -66,7 +61,7 @@ const upDateUser = (request, response) => {
     users.push(
       { id: novoId, ...novoUser }
     )
-    fs.writeFile("./scr/modal/dataUsers.json", JSON.stringify(users), (err) => { console.log(err) })
+    fs.writeFile(`${users}`, JSON.stringify(users), (err) => { console.log(err) })
     response.status(201).send("User incluido")
   };
 }

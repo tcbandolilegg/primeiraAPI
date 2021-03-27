@@ -1,6 +1,5 @@
-const notebooks = require('../modal/dataNotebooks.json');
-// const express = require('express');
-const fs = require('fs');
+const notebooks = require('https://drive.google.com/file/d/1nUykaIJKacg7IQqtYyl6uo3LmIugayZM/view?usp=sharing')
+const fs = require('fs')
 
 
 const allNotebooks = (_, response) => {
@@ -30,7 +29,7 @@ const saveNotebook = (request, response) => {
   notebooks.push(
     { id: novoId, ...novoUsuario }
   )
-  fs.writeFile("./scr/modal/dataNotebooks.json", JSON.stringify(notebooks), (err) => { console.log(err) })
+  fs.writeFile(`${notebooks}`, JSON.stringify(notebooks), (err) => { console.log(err) })
   response.status(201).send("Notebook incluido")
 };
 
@@ -42,7 +41,7 @@ const deleteNotebook = (request, response) => {
   if (notebookEncontrado.length > 0) {
     posicao = notebookEncontrado.indexOf(notebookEncontrado.id);
     notebooks.splice(posicao, 1);
-    fs.writeFile("./scr/modal/dataNotebooks.json", JSON.stringify(notebooks), (err) => { console.log(err) })
+    fs.writeFile(`${notebooks}`, JSON.stringify(notebooks), (err) => { console.log(err) })
     response.status(200).send("Usuário Excluído")
 
   } else {
@@ -66,7 +65,7 @@ const upDateNotebook = (request, response) => {
     notebooks.push(
       { id: novoId, ...novoNotebook }
     )
-    fs.writeFile("./scr/modal/dataNotebooks.json", JSON.stringify(notebooks), (err) => { console.log(err) })
+    fs.writeFile(`${notebooks}`, JSON.stringify(notebooks), (err) => { console.log(err) })
     response.status(201).send("Notebook incluido")
   };
 }

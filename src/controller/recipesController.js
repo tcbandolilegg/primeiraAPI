@@ -1,6 +1,5 @@
-const recipes = require('../modal/dataRecipes.json');
-// const express = require('express');
-const fs = require('fs');
+const recipes = require('https://drive.google.com/file/d/1l0vIsB2evUPXBdEH6FZLFdXFrtNRZCna/view?usp=sharing')
+const fs = require('fs')
 
 
 const allRecipes = (_, response) => {
@@ -30,7 +29,7 @@ const saveRecipe = (request, response) => {
   recipes.push(
     { id: novoId, ...novoUsuario }
   )
-  fs.writeFile("./scr/modal/dtaCategories.json", JSON.stringify(recipes), (err) => { console.log(err) })
+  fs.writeFile(`${recipes}`, JSON.stringify(recipes), (err) => { console.log(err) })
   response.status(201).send("Recipe incluido")
 };
 
@@ -42,7 +41,7 @@ const deleteRecipe = (request, response) => {
   if (recipeEncontrado.length > 0) {
     posicao = recipeEncontrado.indexOf(recipeEncontrado.id);
     recipes.splice(posicao, 1);
-    fs.writeFile("./scr/modal/dataRecipes.json", JSON.stringify(recipes), (err) => { console.log(err) })
+    fs.writeFile(`${recipes}`, JSON.stringify(recipes), (err) => { console.log(err) })
     response.status(200).send("Usuário Excluído")
 
   } else {
@@ -66,7 +65,7 @@ const upDateRecipe = (request, response) => {
     recipes.push(
       { id: novoId, ...novoRecipe }
     )
-    fs.writeFile("./scr/modal/dataRecipes.json", JSON.stringify(recipes), (err) => { console.log(err) })
+    fs.writeFile(`${recipes}`, JSON.stringify(recipes), (err) => { console.log(err) })
     response.status(201).send("Recipe incluido")
   };
 }

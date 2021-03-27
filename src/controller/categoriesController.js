@@ -1,5 +1,4 @@
-const categories = require('../modal/dataCategories.json');
-// const express = require('express');
+const categories = require('https://drive.google.com/file/d/1CIqbf8jA8B0uue8rggM0OzAbfXFOKrah/view?usp=sharing');
 const fs = require('fs');
 
 
@@ -30,7 +29,7 @@ const saveCategory = (request, response) => {
   categories.push(
     { id: novoId, ...novoUsuario }
   )
-  fs.writeFile("./scr/modal/dataCategorys.json", JSON.stringify(categories), (err) => { console.log(err) })
+  fs.writeFile(`${categories}`, JSON.stringify(categories), (err) => { console.log(err) })
   response.status(201).send("Category incluido")
 };
 
@@ -42,7 +41,7 @@ const deleteCategory = (request, response) => {
   if (categoryEncontrado.length > 0) {
     posicao = categoryEncontrado.indexOf(categoryEncontrado.id);
     categories.splice(posicao, 1);
-    fs.writeFile("./scr/modal/dataCategories.json", JSON.stringify(categories), (err) => { console.log(err) })
+    fs.writeFile(`${categories}`, JSON.stringify(categories), (err) => { console.log(err) })
     response.status(200).send("Usuário Excluído")
 
   } else {
@@ -66,7 +65,7 @@ const upDateCategory = (request, response) => {
     categories.push(
       { id: novoId, ...novoCategory }
     )
-    fs.writeFile("./scr/modal/dataCategories.json", JSON.stringify(categories), (err) => { console.log(err) })
+    fs.writeFile(`${categories}`, JSON.stringify(categories), (err) => { console.log(err) })
     response.status(201).send("Category incluido")
   };
 }

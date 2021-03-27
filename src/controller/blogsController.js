@@ -1,6 +1,5 @@
-const blogs = require('../modal/dataBlogs.json');
-// const express = require('express');
-const fs = require('fs');
+const blogs = require('https://drive.google.com/file/d/1XNw3CVv3iYxuHYh76MgXI70VaTnyhozy/view?usp=sharing')
+const fs = require('fs')
 
 
 const allBlogs = (_, response) => {
@@ -30,7 +29,7 @@ const saveBlog = (request, response) => {
   blogs.push(
     { id: novoId, ...novoUsuario }
   )
-  fs.writeFile("./scr/modal/dataBlog.json", JSON.stringify(blogs), (err) => { console.log(err) })
+  fs.writeFile(`${blogs}`, JSON.stringify(blogs), (err) => { console.log(err) })
   response.status(201).send("Blog incluido")
 };
 
@@ -42,7 +41,7 @@ const deleteBlog = (request, response) => {
   if (blogEncontrado.length > 0) {
     posicao = blogEncontrado.indexOf(blogEncontrado.id);
     blogs.splice(posicao, 1);
-    fs.writeFile("./scr/modal/blogs.json", JSON.stringify(blogs), (err) => { console.log(err) })
+    fs.writeFile(`${blogs}`, JSON.stringify(blogs), (err) => { console.log(err) })
     response.status(200).send("Usuário Excluído")
 
   } else {
@@ -66,7 +65,7 @@ const upDateBlog = (request, response) => {
     blogs.push(
       { id: novoId, ...novoBlog }
     )
-    fs.writeFile("./scr/modal/dataBlogs.json", JSON.stringify(blogs), (err) => { console.log(err) })
+    fs.writeFile(`${blogs}`, JSON.stringify(blogs), (err) => { console.log(err) })
     response.status(201).send("Blog incluido")
   };
 }
