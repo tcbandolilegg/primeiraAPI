@@ -5,11 +5,11 @@ const categoriesController = require("../controller/categoriesController");
 
 
 
-router.get("/", usersController.allUsers);
-router.get("/:id", usersController.searchForId);
-router.post("/", usersController.saveUser)
-router.delete("/:id", usersController.deleteUser)
-router.patch("/:id", usersController.upDateUser)
+router.get("/", categoriesController.allCategories);
+router.get("/:id", categoriesController.searchCategoryForId);
+router.post("/", categoriesController.saveCategory)
+router.delete("/:id", categoriesController.deleteCategory)
+router.patch("/:id", categoriesController.upDateCategory)
 
 
 

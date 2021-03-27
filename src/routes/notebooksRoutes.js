@@ -5,11 +5,11 @@ const notebooksController = require("../controller/notebooksController")
 
 
 
-router.get("/", usersController.allUsers);
-router.get("/:id", usersController.searchForId);
-router.post("/", usersController.saveUser)
-router.delete("/:id", usersController.deleteUser)
-router.patch("/:id", usersController.upDateUser)
+router.get("/", notebooksController.allNotebooks);
+router.get("/:id", notebooksController.searchNotebookForId);
+router.post("/", notebooksController.saveNotebook)
+router.delete("/:id", notebooksController.deleteNotebook)
+router.patch("/:id", notebooksController.upDateNotebook)
 
 
 

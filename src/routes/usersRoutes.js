@@ -3,10 +3,12 @@ const express = require('express');
 const router = express.Router();
 const controller = require("../controller/usersController");
 
-router.get("/usuarios", controller.listarTodosUsers);
-router.get("/usuarios/:id", controller.pesquisaPorId);
-router.post("/usuarios", controller.salvarUser)
-router.delete("/usuarios/:id", controller.apagarUser)
+router.get("/", usersController.allUsers);
+router.get("/:id", usersController.searchUserForId);
+router.post("/", usersController.saveUser)
+router.delete("/:id", usersController.deleteUser)
+router.patch("/:id", usersController.upDateUser)
+
 
 
 module.exports = router;

@@ -1,14 +1,14 @@
 
 const express = require('express');
 const router = express.Router();
-const bologsController = require("../controller/blogsController");
+const blogsController = require("../controller/blogsController");
 
 
-router.get("/", usersController.allUsers);
-router.get("/:id", usersController.searchForId);
-router.post("/", usersController.saveUser)
-router.delete("/:id", usersController.deleteUser)
-router.patch("/:id", usersController.upDateUser)
+router.get("/", usersController.allBlogs);
+router.get("/:id", usersController.searchBlogForId);
+router.post("/", usersController.saveBlog)
+router.delete("/:id", usersController.deleteBlog)
+router.patch("/:id", usersController.upDateBlog)
 
 
 

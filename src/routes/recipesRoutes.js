@@ -4,11 +4,11 @@ const router = express.Router();
 const recipesController = require("../controller/recipesController")
 
 
-router.get("/", usersController.allUsers);
-router.get("/:id", usersController.searchForId);
-router.post("/", usersController.saveUser)
-router.delete("/:id", usersController.deleteUser)
-router.patch("/:id", usersController.upDateUser)
+router.get("/", recipesController.allRecipes);
+router.get("/:id", recipesController.searchRecipeForId);
+router.post("/", recipesController.saveRecipe)
+router.delete("/:id", recipesController.deleteRecipe)
+router.patch("/:id", recipesController.upDateRecipe)
 
 
 
