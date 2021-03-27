@@ -1,74 +1,74 @@
-const users = require('../modal/dataUsers.json');
+const notebooks = require('../modal/dataNotebooks.json');
 // const express = require('express');
 const fs = require('fs');
 
 
-const allUsers = (_, response) => {
-  response.send(users);
+const allNotebooks = (_, response) => {
+  response.send(notebooks);
 };
 
 
 // request é o que vem do HTTP pra o servidor como uma pergunta através da rota
-const searchUserForId = (request, response) => {
-  const userEncontrado = users.filter((user) => {
-    return user.id === Number(request.params.id)
+const searchNotebookForId = (request, response) => {
+  const notebookEncontrado = notebooks.filter((notebook) => {
+    return notebook.id === Number(request.params.id)
   })
-  if (userEncontrado.length > 0) {
-    response.status(200).send(userEncontrado)
+  if (notebookEncontrado.length > 0) {
+    response.status(200).send(notebookEncontrado)
 
   } else {
-    response.status(404).send("User não encontrado")
+    response.status(404).send("Notebook não encontrado")
   }
 
 };
 
-const saveUser = (request, response) => {
+const saveNotebook = (request, response) => {
 
   const novoId = request.body.cpf + date()
   const novoUsuario = request.body
 
-  users.push(
+  notebooks.push(
     { id: novoId, ...novoUsuario }
   )
-  fs.writeFile("./scr/modal/users.json", JSON.stringify(users), (err) => { console.log(err) })
-  response.status(201).send("User incluido")
+  fs.writeFile("./scr/modal/dataNotebooks.json", JSON.stringify(notebooks), (err) => { console.log(err) })
+  response.status(201).send("Notebook incluido")
 };
 
 
-const deleteUser = (request, response) => {
-  const userEncontrado = users.filter((user) => {
-    return user.id === Number(request.params.id)
+const deleteNotebook = (request, response) => {
+  const notebookEncontrado = notebooks.filter((notebook) => {
+    return notebook.id === Number(request.params.id)
   })
-  if (userEncontrado.length > 0) {
-    posicao = userEncontrado.indexOf(userEncontrado.id);
-    users.splice(posicao, 1);
-    fs.writeFile("./scr/modal/users.json", JSON.stringify(users), (err) => { console.log(err) })
+  if (notebookEncontrado.length > 0) {
+    posicao = notebookEncontrado.indexOf(notebookEncontrado.id);
+    notebooks.splice(posicao, 1);
+    fs.writeFile("./scr/modal/dataNotebooks.json", JSON.stringify(notebooks), (err) => { console.log(err) })
     response.status(200).send("Usuário Excluído")
 
   } else {
-    response.status(404).send("User não encontrado")
+    response.status(404).send("Notebook não encontrado")
   }
 
 }
 
 
 
-const upDateUser = (request, response) => {
+const upDateNotebook = (request, response) => {
 
-  const userEncontrado = users.filter((user) => {
-    return user.id === Number(request.params.id)
+  const notebookEncontrado = notebooks.filter((notebook) => {
+    return notebook.id === Number(request.params.id)
   })
-  if (userEncontrado.length > 0) {
-    posicao = userEncontrado.indexOf(userEncontrado.id);
-    const novoId = userEncontrado.id
-    users.splice(posicao, 1);
-    const novoUser = request.body
-    users.push(
-      { id: novoId, ...novoUser }
+  if (notebookEncontrado.length > 0) {
+    posicao = notebookEncontrado.indexOf(notebookEncontrado.id);
+    const novoId = notebookEncontrado.id
+    notebooks.splice(posicao, 1);
+    const novoNotebook = request.body
+    notebooks.push(
+      { id: novoId, ...novoNotebook }
     )
-    fs.writeFile("./scr/modal/dataUsers.json", JSON.stringify(users), (err) => { console.log(err) })
-    response.status(201).send("User incluido")
+    fs.writeFile("./scr/modal/dataNotebooks.json", JSON.stringify(notebooks), (err) => { console.log(err) })
+    response.status(201).send("Notebook incluido")
   };
 }
 
-module.exports = { allUsers, searchUserForId, saveUser, deleteUser, upDateUser }
+module.exports = { allNotebooks, searchNotebookForId, saveNotebook, deleteNotebook, upDateNotebook }

@@ -1,74 +1,74 @@
-const users = require('../modal/dataUsers.json');
+const blogs = require('../modal/dataBlogs.json');
 // const express = require('express');
 const fs = require('fs');
 
 
-const allUsers = (_, response) => {
-  response.send(users);
+const allBlogs = (_, response) => {
+  response.send(blogs);
 };
 
 
 // request é o que vem do HTTP pra o servidor como uma pergunta através da rota
-const searchUserForId = (request, response) => {
-  const userEncontrado = users.filter((user) => {
-    return user.id === Number(request.params.id)
+const searchBlogForId = (request, response) => {
+  const blogEncontrado = blogs.filter((blog) => {
+    return blog.id === Number(request.params.id)
   })
-  if (userEncontrado.length > 0) {
-    response.status(200).send(userEncontrado)
+  if (blogEncontrado.length > 0) {
+    response.status(200).send(blogEncontrado)
 
   } else {
-    response.status(404).send("User não encontrado")
+    response.status(404).send("Blog não encontrado")
   }
 
 };
 
-const saveUser = (request, response) => {
+const saveBlog = (request, response) => {
 
   const novoId = request.body.cpf + date()
   const novoUsuario = request.body
 
-  users.push(
+  blogs.push(
     { id: novoId, ...novoUsuario }
   )
-  fs.writeFile("./scr/modal/users.json", JSON.stringify(users), (err) => { console.log(err) })
-  response.status(201).send("User incluido")
+  fs.writeFile("./scr/modal/dataBlog.json", JSON.stringify(blogs), (err) => { console.log(err) })
+  response.status(201).send("Blog incluido")
 };
 
 
-const deleteUser = (request, response) => {
-  const userEncontrado = users.filter((user) => {
-    return user.id === Number(request.params.id)
+const deleteBlog = (request, response) => {
+  const blogEncontrado = blogs.filter((blog) => {
+    return blog.id === Number(request.params.id)
   })
-  if (userEncontrado.length > 0) {
-    posicao = userEncontrado.indexOf(userEncontrado.id);
-    users.splice(posicao, 1);
-    fs.writeFile("./scr/modal/users.json", JSON.stringify(users), (err) => { console.log(err) })
+  if (blogEncontrado.length > 0) {
+    posicao = blogEncontrado.indexOf(blogEncontrado.id);
+    blogs.splice(posicao, 1);
+    fs.writeFile("./scr/modal/blogs.json", JSON.stringify(blogs), (err) => { console.log(err) })
     response.status(200).send("Usuário Excluído")
 
   } else {
-    response.status(404).send("User não encontrado")
+    response.status(404).send("Blog não encontrado")
   }
 
 }
 
 
 
-const upDateUser = (request, response) => {
+const upDateBlog = (request, response) => {
 
-  const userEncontrado = users.filter((user) => {
-    return user.id === Number(request.params.id)
+  const blogEncontrado = blogs.filter((blog) => {
+    return blog.id === Number(request.params.id)
   })
-  if (userEncontrado.length > 0) {
-    posicao = userEncontrado.indexOf(userEncontrado.id);
-    const novoId = userEncontrado.id
-    users.splice(posicao, 1);
-    const novoUser = request.body
-    users.push(
-      { id: novoId, ...novoUser }
+  if (blogEncontrado.length > 0) {
+    posicao = blogEncontrado.indexOf(blogEncontrado.id);
+    const novoId = blogEncontrado.id
+    blogs.splice(posicao, 1);
+    const novoBlog = request.body
+    blogs.push(
+      { id: novoId, ...novoBlog }
     )
-    fs.writeFile("./scr/modal/dataUsers.json", JSON.stringify(users), (err) => { console.log(err) })
-    response.status(201).send("User incluido")
+    fs.writeFile("./scr/modal/dataBlogs.json", JSON.stringify(blogs), (err) => { console.log(err) })
+    response.status(201).send("Blog incluido")
   };
 }
 
-module.exports = { allUsers, searchUserForId, saveUser, deleteUser, upDateUser }
+module.exports = { allBlogs, searchBlogForId, saveBlog, deleteBlog, upDateBlog }

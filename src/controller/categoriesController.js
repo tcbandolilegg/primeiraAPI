@@ -1,75 +1,75 @@
-const users = require('../modal/dataUsers.json');
+const recipes = require('../modal/dataRecipes.json');
 // const express = require('express');
 const fs = require('fs');
 
 
-const allUsers = (_, response) => {
-  response.send(users);
+const allRecipes = (_, response) => {
+  response.send(recipes);
 };
 
 
 // request é o que vem do HTTP pra o servidor como uma pergunta através da rota
-const searchUserForId = (request, response) => {
-  const userEncontrado = users.filter((user) => {
-    return user.id === Number(request.params.id)
+const searchRecipeForId = (request, response) => {
+  const recipeEncontrado = recipes.filter((recipe) => {
+    return recipe.id === Number(request.params.id)
   })
-  if (userEncontrado.length > 0) {
-    response.status(200).send(userEncontrado)
+  if (recipeEncontrado.length > 0) {
+    response.status(200).send(recipeEncontrado)
 
   } else {
-    response.status(404).send("User não encontrado")
+    response.status(404).send("Recipe não encontrado")
   }
 
 };
 
-const saveUser = (request, response) => {
+const saveRecipe = (request, response) => {
 
   const novoId = request.body.cpf + date()
   const novoUsuario = request.body
 
-  users.push(
+  recipes.push(
     { id: novoId, ...novoUsuario }
   )
-  fs.writeFile("./scr/modal/users.json", JSON.stringify(users), (err) => { console.log(err) })
-  response.status(201).send("User incluido")
+  fs.writeFile("./scr/modal/dataRecipes.json", JSON.stringify(recipes), (err) => { console.log(err) })
+  response.status(201).send("Recipe incluido")
 };
 
 
-const deleteUser = (request, response) => {
-  const userEncontrado = users.filter((user) => {
-    return user.id === Number(request.params.id)
+const deleteRecipe = (request, response) => {
+  const recipeEncontrado = recipes.filter((recipe) => {
+    return recipe.id === Number(request.params.id)
   })
-  if (userEncontrado.length > 0) {
-    posicao = userEncontrado.indexOf(userEncontrado.id);
-    users.splice(posicao, 1);
-    fs.writeFile("./scr/modal/users.json", JSON.stringify(users), (err) => { console.log(err) })
+  if (recipeEncontrado.length > 0) {
+    posicao = recipeEncontrado.indexOf(recipeEncontrado.id);
+    recipes.splice(posicao, 1);
+    fs.writeFile("./scr/modal/dataRecipes.json", JSON.stringify(recipes), (err) => { console.log(err) })
     response.status(200).send("Usuário Excluído")
 
   } else {
-    response.status(404).send("User não encontrado")
+    response.status(404).send("Recipe não encontrado")
   }
 
 }
 
 
 
-const upDateUser = (request, response) => {
+const upDateRecipe = (request, response) => {
 
-  const userEncontrado = users.filter((user) => {
-    return user.id === Number(request.params.id)
+  const recipeEncontrado = recipes.filter((recipe) => {
+    return recipe.id === Number(request.params.id)
   })
-  if (userEncontrado.length > 0) {
-    posicao = userEncontrado.indexOf(userEncontrado.id);
-    const novoId = userEncontrado.id
-    users.splice(posicao, 1);
-    const novoUser = request.body
-    users.push(
-      { id: novoId, ...novoUser }
+  if (recipeEncontrado.length > 0) {
+    posicao = recipeEncontrado.indexOf(recipeEncontrado.id);
+    const novoId = recipeEncontrado.id
+    recipes.splice(posicao, 1);
+    const novoRecipe = request.body
+    recipes.push(
+      { id: novoId, ...novoRecipe }
     )
-    fs.writeFile("./scr/modal/dataUsers.json", JSON.stringify(users), (err) => { console.log(err) })
-    response.status(201).send("User incluido")
+    fs.writeFile("./scr/modal/dataRecipes.json", JSON.stringify(recipes), (err) => { console.log(err) })
+    response.status(201).send("Recipe incluido")
   };
 }
 
-module.exports = { allUsers, searchUserForId, saveUser, deleteUser, upDateUser }
+module.exports = { allRecipes, searchRecipeForId, saveRecipe, deleteRecipe, upDateRecipe }
 
