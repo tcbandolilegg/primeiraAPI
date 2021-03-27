@@ -1,4 +1,6 @@
-const users = require('../modal/dataUsers.json');
+
+const usersPath = 'D:/Treinamento/013Inovationspace/primeiraapi/src/modal/dataUsers.json'
+const users = require(`${usersPath}`);
 const fs = require('fs')
 
 
@@ -27,7 +29,15 @@ const saveUser = (request, response) => {
   users.push(
     { id: novoId, ...novoUsuario }
   )
-  fs.writeFile(`${users}`, JSON.stringify(users), (err) => { console.log('erro fs write users', err) })
+  try {
+    fs.unlinkSync(`${usersPath}`)
+    console.log('Arquivo excluido no incluir users')
+    //file removed
+  } catch (err) {
+    console.error(err)
+  }
+  console.log('Users depois do push users', users)
+  fs.writeFile(`${usersPath}`, JSON.stringify(users), (err) => { console.log('erro fs write users', err) })
   response.status(201).send("User incluido")
 };
 

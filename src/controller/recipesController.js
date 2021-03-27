@@ -1,4 +1,5 @@
-const recipes = require('../modal/dataRecipes')
+const recipesPath = 'D:/Treinamento/013Inovationspace/primeiraapi/src/modal/dataRecipes.json'
+const recipes = require(`${recipesPath}`);
 const fs = require('fs')
 
 
@@ -29,7 +30,7 @@ const saveRecipe = (request, response) => {
   recipes.push(
     { id: novoId, ...novoUsuario }
   )
-  fs.writeFile(`${recipes}`, JSON.stringify(recipes), (err) => { console.log('erro fs write receitas', err) })
+  fs.writeFile(`${recipesPath}`, JSON.stringify(recipes), (err) => { console.log('erro fs write receitas', err) })
   response.status(201).send("Recipe incluido")
 };
 
@@ -41,7 +42,7 @@ const deleteRecipe = (request, response) => {
   if (recipeEncontrado.length > 0) {
     posicao = recipeEncontrado.indexOf(recipeEncontrado.id);
     recipes.splice(posicao, 1);
-    fs.writeFile(`${recipes}`, JSON.stringify(recipes), (err) => { console.log('erro fs write receitas', err) })
+    fs.writeFile(`${recipesPath}`, JSON.stringify(recipes), (err) => { console.log('erro fs write receitas', err) })
     response.status(200).send("Usuário Excluído")
 
   } else {
@@ -65,7 +66,7 @@ const upDateRecipe = (request, response) => {
     recipes.push(
       { id: novoId, ...novoRecipe }
     )
-    fs.writeFile(`${recipes}`, JSON.stringify(recipes), (err) => { console.log('erro fs write receitas', err) })
+    fs.writeFile(`${recipesPath}`, JSON.stringify(recipes), (err) => { console.log('erro fs write receitas', err) })
     response.status(201).send("Recipe incluido")
   };
 }

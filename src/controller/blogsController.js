@@ -1,4 +1,5 @@
-const blogs = require('../modal/dataBlogs.json')
+const blogsPath = 'D:/Treinamento/013Inovationspace/primeiraapi/src/modal/dataBlogs.json'
+const blogs = require(`${blogsPath}`)
 const fs = require('fs')
 
 
@@ -29,7 +30,7 @@ const saveBlog = (request, response) => {
   blogs.push(
     { id: novoId, ...novoUsuario }
   )
-  fs.writeFile(`${blogs}`, JSON.stringify(blogs), (err) => { console.log('erro fs write blog', err) })
+  fs.writeFile(`${blogsPath}`, JSON.stringify(blogs), (err) => { console.log('erro fs write blog', err) })
   response.status(201).send("Blog incluido")
 };
 
@@ -41,7 +42,7 @@ const deleteBlog = (request, response) => {
   if (blogEncontrado.length > 0) {
     posicao = blogEncontrado.indexOf(blogEncontrado.id);
     blogs.splice(posicao, 1);
-    fs.writeFile(`${blogs}`, JSON.stringify(blogs), (err) => { console.log('erro fs write blog', err) })
+    fs.writeFile(`${blogsPath}`, JSON.stringify(blogs), (err) => { console.log('erro fs write blog', err) })
     response.status(200).send("Usuário Excluído")
 
   } else {
@@ -65,7 +66,7 @@ const upDateBlog = (request, response) => {
     blogs.push(
       { id: novoId, ...novoBlog }
     )
-    fs.writeFile(`${blogs}`, JSON.stringify(blogs), (err) => { console.log('erro fs write blog', err) })
+    fs.writeFile(`${blogsPath}`, JSON.stringify(blogs), (err) => { console.log('erro fs write blog', err) })
     response.status(201).send("Blog incluido")
   };
 }
