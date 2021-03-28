@@ -30,8 +30,14 @@ const saveRecipe = (request, response) => {
   recipes.push(
     { id: novoId, ...novoUsuario }
   )
-  fs.writeFile(`${recipesPath}`, JSON.stringify(recipes), (err) => { console.log('erro fs write receitas', err) })
-  response.status(201).send("Recipe incluido")
+
+  try {
+    fs.writeFile(`${recipesPath}`, JSON.stringify(recipes))
+    response.status(201).send("Recipe incluido")
+  } catch (err) {
+    console.error('Erro na gravação do arquivo receitas', err)
+  }
+
 };
 
 
@@ -42,8 +48,13 @@ const deleteRecipe = (request, response) => {
   if (recipeEncontrado.length > 0) {
     posicao = recipeEncontrado.indexOf(recipeEncontrado.id);
     recipes.splice(posicao, 1);
-    fs.writeFile(`${recipesPath}`, JSON.stringify(recipes), (err) => { console.log('erro fs write receitas', err) })
-    response.status(200).send("Usuário Excluído")
+    try {
+      fs.writeFile(`${recipesPath}`, JSON.stringify(recipes))
+      response.status(200).send("Recipe Excluído")
+    } catch (err) {
+      console.error('Erro na gravação do arquivo receitas', err)
+    }
+
 
   } else {
     response.status(404).send("Recipe não encontrado")
@@ -66,8 +77,13 @@ const upDateRecipe = (request, response) => {
     recipes.push(
       { id: novoId, ...novoRecipe }
     )
-    fs.writeFile(`${recipesPath}`, JSON.stringify(recipes), (err) => { console.log('erro fs write receitas', err) })
-    response.status(201).send("Recipe incluido")
+    try {
+      fs.writeFile(`${recipesPath}`, JSON.stringify(recipes))
+      response.status(201).send("Recipe Alterada")
+    } catch (err) {
+      console.error('Erro na gravação do arquivo receitas', err)
+    }
+
   };
 }
 

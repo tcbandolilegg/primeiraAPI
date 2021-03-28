@@ -30,8 +30,13 @@ const saveNotebook = (request, response) => {
   notebooks.push(
     { id: novoId, ...novoUsuario }
   )
-  fs.writeFile(`${notebooksPath}`, JSON.stringify(notebooks), (err) => { console.log('erro fs write notebook', err) })
-  response.status(201).send("Notebook incluido")
+  try {
+    fs.writeFile(`${notebooksPath}`, JSON.stringify(notebooks))
+    response.status(201).send("Notebook incluido")
+  } catch (err) {
+    console.error('Erro na gravação do arquivo noteBooks', err)
+  }
+
 };
 
 
@@ -42,8 +47,12 @@ const deleteNotebook = (request, response) => {
   if (notebookEncontrado.length > 0) {
     posicao = notebookEncontrado.indexOf(notebookEncontrado.id);
     notebooks.splice(posicao, 1);
-    fs.writeFile(`${notebooksPath}`, JSON.stringify(notebooks), (err) => { console.log('erro fs write notebook', err) })
-    response.status(200).send("Usuário Excluído")
+    try {
+      fs.writeFile(`${notebooksPath}`, JSON.stringify(notebooks))
+      response.status(200).send("Notebook Excluído")
+    } catch (err) {
+      console.error('Erro na gravação do arquivo noteBooks', err)
+    }
 
   } else {
     response.status(404).send("Notebook não encontrado")
@@ -66,8 +75,14 @@ const upDateNotebook = (request, response) => {
     notebooks.push(
       { id: novoId, ...novoNotebook }
     )
-    fs.writeFile(`${notebooksPath}`, JSON.stringify(notebooks), (err) => { console.log('erro fs write notebook', err) })
-    response.status(201).send("Notebook incluido")
+
+    try {
+      fs.writeFile(`${notebooksPath}`, JSON.stringify(notebooks))
+      response.status(201).send("Notebook Alterado")
+    } catch (err) {
+      console.error('Erro na gravação do arquivo noteBooks', err)
+    }
+
   };
 }
 

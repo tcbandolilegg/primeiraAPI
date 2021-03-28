@@ -30,8 +30,13 @@ const saveCategory = (request, response) => {
   categories.push(
     { id: novoId, ...novoUsuario }
   )
-  fs.writeFile(`${categoriesPath}`, JSON.stringify(categories), (err) => { console.log('erro fs write categiras', err) })
-  response.status(201).send("Category incluido")
+  try {
+    fs.writeFile(`${categoriesPath}`, JSON.stringify(categories))
+    response.status(201).send("Category incluida")
+  } catch (err) {
+    console.error('Erro na gravação do arquivo categorias', err)
+  }
+
 };
 
 
@@ -42,8 +47,13 @@ const deleteCategory = (request, response) => {
   if (categoryEncontrado.length > 0) {
     posicao = categoryEncontrado.indexOf(categoryEncontrado.id);
     categories.splice(posicao, 1);
-    fs.writeFile(`${categoriesPath}`, JSON.stringify(categories), (err) => { console.log('erro fs write categorias', err) })
-    response.status(200).send("Usuário Excluído")
+    try {
+      fs.writeFile(`${categoriesPath}`, JSON.stringify(categories))
+      response.status(200).send("Categoria Excluída")
+    } catch (err) {
+      console.error('Erro na gravação do arquivo categorias', err)
+    }
+
 
   } else {
     response.status(404).send("Category não encontrado")
@@ -66,8 +76,14 @@ const upDateCategory = (request, response) => {
     categories.push(
       { id: novoId, ...novoCategory }
     )
-    fs.writeFile(`${categoriesPath}`, JSON.stringify(categories), (err) => { console.log('erro fs write categorias', err) })
-    response.status(201).send("Category incluido")
+
+    try {
+      fs.writeFile(`${categoriesPath}`, JSON.stringify(categories))
+      response.status(201).send("Category Alterado")
+    } catch (err) {
+      console.error('Erro na gravação do arquivo categorias', err)
+    }
+
   };
 }
 

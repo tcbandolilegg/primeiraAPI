@@ -30,8 +30,13 @@ const saveBlog = (request, response) => {
   blogs.push(
     { id: novoId, ...novoUsuario }
   )
-  fs.writeFile(`${blogsPath}`, JSON.stringify(blogs), (err) => { console.log('erro fs write blog', err) })
-  response.status(201).send("Blog incluido")
+  try {
+    fs.writeFile(`${blogsPath}`, JSON.stringify(blogs))
+    response.status(201).send("Blog incluido")
+  } catch (err) {
+    console.error('Erro na gravação do arquivo blogs', err)
+  }
+
 };
 
 
@@ -42,8 +47,12 @@ const deleteBlog = (request, response) => {
   if (blogEncontrado.length > 0) {
     posicao = blogEncontrado.indexOf(blogEncontrado.id);
     blogs.splice(posicao, 1);
-    fs.writeFile(`${blogsPath}`, JSON.stringify(blogs), (err) => { console.log('erro fs write blog', err) })
-    response.status(200).send("Usuário Excluído")
+    try {
+      fs.writeFile(`${blogsPath}`, JSON.stringify(blogs))
+      response.status(201).send("Blog Excluído")
+    } catch (err) {
+      console.error('Erro na gravação do arquivo blogs', err)
+    }
 
   } else {
     response.status(404).send("Blog não encontrado")
@@ -66,8 +75,12 @@ const upDateBlog = (request, response) => {
     blogs.push(
       { id: novoId, ...novoBlog }
     )
-    fs.writeFile(`${blogsPath}`, JSON.stringify(blogs), (err) => { console.log('erro fs write blog', err) })
-    response.status(201).send("Blog incluido")
+    try {
+      fs.writeFile(`${blogsPath}`, JSON.stringify(blogs))
+      response.status(201).send("Blog Alterado")
+    } catch (err) {
+      console.error('Erro na gravação do arquivo blogs', err)
+    }
   };
 }
 

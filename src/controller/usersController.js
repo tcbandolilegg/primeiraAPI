@@ -34,11 +34,15 @@ const saveUser = (request, response) => {
     console.log('Arquivo excluido no incluir users')
     //file removed
   } catch (err) {
-    console.error(err)
+    console.error('Erro na exclusão do arquivo users', err)
   }
   console.log('Users depois do push users', users)
-  fs.writeFile(`${usersPath}`, JSON.stringify(users), (err) => { console.log('erro fs write users', err) })
-  response.status(201).send("User incluido")
+  try {
+    fs.writeFile(`${usersPath}`, JSON.stringify(users))
+    response.status(201).send("User incluido")
+  } catch (err) {
+    console.error('Erro na gravação do arquivo users', err)
+  }
 };
 
 
@@ -49,9 +53,12 @@ const deleteUser = (request, response) => {
   if (userEncontrado.length > 0) {
     posicao = userEncontrado.indexOf(userEncontrado.id);
     users.splice(posicao, 1);
-    fs.writeFile(`${users}`, JSON.stringify(users), (err) => { console.log('erro fs write users', err) })
-    response.status(200).send("Usuário Excluído")
-
+    try {
+      fs.writeFile(`${users}`, JSON.stringify(users))
+      response.status(200).send("Usuário Excluído")
+    } catch (err) {
+      console.error('Erro na gravação do arquivo users', err)
+    }
   } else {
     response.status(404).send("User não encontrado")
   }
@@ -71,8 +78,12 @@ const upDateUser = (request, response) => {
     users.push(
       { id: novoId, ...novoUser }
     )
-    fs.writeFile(`${users}`, JSON.stringify(users), (err) => { console.log('erro fs write users', err) })
-    response.status(201).send("User incluido")
+    try {
+      fs.writeFile(`${users}`, JSON.stringify(users))
+      response.status(200).send("Usuário Alterado")
+    } catch (err) {
+      console.error('Erro na gravação do arquivo users', err)
+    }
   };
 }
 
