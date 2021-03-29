@@ -1,0 +1,13 @@
+id
+userLogin
+nome
+idade
+cpf
+rg
+data_nasc
+sexo
+mae
+pai
+email
+foto
+senha
