@@ -4,7 +4,7 @@ _APIs são interfaces que permitem a usuários realizar transações em arquivos
 
 ## Esta API será consumida pelo site Receitas de Família, é um backEnd simples que visa permitir a manipulação dos dado da plataforma
 
-## A plataforma possui 1 banco de dados simples e não relacional, todas as relações são feitas diretamente nas tabelas por pesquisa simples com chaves primarias ou estrngeiras
+## A plataforma possui 1 banco de dados simples e não relacional, todos os checks são feitos diretamente nas tabelas por pesquisa simples com chaves primarias ou estrngeiras
 
 ## **Entenda as rotas da API**
 
