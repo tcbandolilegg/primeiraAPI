@@ -1,8 +1,6 @@
-
-const express = require('express');
+import express from 'express'
+import recipesController from '../controller/recipesController.js'
 const router = express.Router();
-const recipesController = require("../controller/recipesController")
-
 
 router.get("/", recipesController.allRecipes);
 router.get("/:id", recipesController.searchRecipeForId);
@@ -10,7 +8,5 @@ router.post("/", recipesController.saveRecipe)
 router.delete("/:id", recipesController.deleteRecipe)
 router.patch("/:id", recipesController.upDateRecipe)
 
-
-
-module.exports = router;
+export default router
 

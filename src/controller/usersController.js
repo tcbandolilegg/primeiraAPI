@@ -1,7 +1,6 @@
-
+import { promises as fs } from 'fs'
+const { readFile, writeFile } = fs
 const usersPath = 'D:/Treinamento/013Inovationspace/primeiraapi/src/modal/dataUsers.json'
-const users = require(`${usersPath}`);
-const fs = require('fs')
 
 
 const allUsers = (_, response) => {
@@ -38,7 +37,7 @@ const saveUser = (request, response) => {
   }
   console.log('Users depois do push users', users)
   try {
-    fs.writeFile(`${usersPath}`, JSON.stringify(users))
+    writeFile(`${usersPath}`, JSON.stringify(users))
     response.status(201).send("User incluido")
   } catch (err) {
     console.error('Erro na gravação do arquivo users', err)
@@ -54,7 +53,7 @@ const deleteUser = (request, response) => {
     posicao = userEncontrado.indexOf(userEncontrado.id);
     users.splice(posicao, 1);
     try {
-      fs.writeFile(`${users}`, JSON.stringify(users))
+      writeFile(`${users}`, JSON.stringify(users))
       response.status(200).send("Usuário Excluído")
     } catch (err) {
       console.error('Erro na gravação do arquivo users', err)
@@ -79,12 +78,11 @@ const upDateUser = (request, response) => {
       { id: novoId, ...novoUser }
     )
     try {
-      fs.writeFile(`${users}`, JSON.stringify(users))
+      writeFile(`${users}`, JSON.stringify(users))
       response.status(200).send("Usuário Alterado")
     } catch (err) {
       console.error('Erro na gravação do arquivo users', err)
     }
   };
 }
-
-module.exports = { allUsers, searchUserForId, saveUser, deleteUser, upDateUser }
+export default { allUsers, searchUserForId, saveUser, deleteUser, upDateUser }

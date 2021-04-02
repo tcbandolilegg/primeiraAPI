@@ -1,6 +1,6 @@
+import { promises as fs } from 'fs'
 const recipesPath = 'D:/Treinamento/013Inovationspace/primeiraapi/src/modal/dataRecipes.json'
-const recipes = require(`${recipesPath}`);
-const fs = require('fs')
+const { readFile, writeFile } = fs
 
 
 const allRecipes = (_, response) => {
@@ -87,4 +87,4 @@ const upDateRecipe = (request, response) => {
   };
 }
 
-module.exports = { allRecipes, searchRecipeForId, saveRecipe, deleteRecipe, upDateRecipe }
+export default { allRecipes, searchRecipeForId, saveRecipe, deleteRecipe, upDateRecipe }

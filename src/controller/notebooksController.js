@@ -1,6 +1,7 @@
+import { promises as fs } from 'fs'
+const { readFile, writeFile } = fs
 const notebooksPath = 'D:/Treinamento/013Inovationspace/primeiraapi/src/modal/dataNotebooks.json'
-const notebooks = require(`${notebooksPath}`);
-const fs = require('fs')
+
 
 
 const allNotebooks = (_, response) => {
@@ -86,4 +87,4 @@ const upDateNotebook = (request, response) => {
   };
 }
 
-module.exports = { allNotebooks, searchNotebookForId, saveNotebook, deleteNotebook, upDateNotebook }
+export default { allNotebooks, searchNotebookForId, saveNotebook, deleteNotebook, upDateNotebook }

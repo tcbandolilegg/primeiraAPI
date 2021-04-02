@@ -1,6 +1,6 @@
+import { promises as fs } from 'fs'
+const { readFile, writeFile } = fs
 const categoriesPath = 'D:/Treinamento/013Inovationspace/primeiraapi/src/modal/dataCategories.json'
-const categories = require(`${categoriesPath}`)
-const fs = require('fs');
 
 
 const allCategories = (_, response) => {
@@ -87,5 +87,5 @@ const upDateCategory = (request, response) => {
   };
 }
 
-module.exports = { allCategories, searchCategoryForId, saveCategory, deleteCategory, upDateCategory }
+export default { allCategories, searchCategoryForId, saveCategory, deleteCategory, upDateCategory }
 

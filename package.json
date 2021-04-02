@@ -1,5 +1,5 @@
 {
-  "name": "treinamentodiego",
+  "name": "rerecitadefamilia",
   "version": "1.0.0",
   "description": "Construindo API",
   "main": "server.js",
@@ -12,7 +12,8 @@
   "devDependencies": {},
   "scripts": {
     "test": "nodemon",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
   ],
   "author": "Thereza Cristina BAndoli Legg",
   "license": "ISC",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/tcbandolilegg/primeiraAPI/issues"
   },

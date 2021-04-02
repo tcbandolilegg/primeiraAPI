@@ -1,6 +1,7 @@
+import { promises as fs } from 'fs'
+const { readFile, writeFile } = fs
+
 const blogsPath = 'D:/Treinamento/013Inovationspace/primeiraapi/src/modal/dataBlogs.json'
-const blogs = require(`${blogsPath}`)
-const fs = require('fs')
 
 
 const allBlogs = (_, response) => {
@@ -84,4 +85,4 @@ const upDateBlog = (request, response) => {
   };
 }
 
-module.exports = { allBlogs, searchBlogForId, saveBlog, deleteBlog, upDateBlog }
+export default { allBlogs, searchBlogForId, saveBlog, deleteBlog, upDateBlog }

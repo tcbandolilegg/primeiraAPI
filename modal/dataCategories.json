@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "decricao": "Entrada",
+    "sabor": "Salgado"
+  },
+  {
+    "id": 2,
+    "decricao": "Sobremesa",
+    "sabor": "Doce"
+  },
+  {
+    "id": 3,
+    "decricao": "Prato principal",
+    "sabor": "Salgado"
+  },
+  {
+    "id": 4,
+    "decricao": "Acompahamento",
+    "sabor": "Salgado"
+  },
+  {
+    "id": 5,
+    "decricao": "Acompahamento",
+    "sabor": "Doce"
+  },
+  {
+    "id": 6,
+    "decricao": "Torta",
+    "sabor": "Salgado"
+  },
+  {
+    "id": 7,
+    "decricao": "Torta",
+    "sabor": "Doce"
+  },
+  {
+    "id": 8,
+    "decricao": "Bolo",
+    "sabor": "Salgado"
+  },
+  {
+    "id": 9,
+    "decricao": "Bolo",
+    "sabor": "Doce"
+  },
+  {
+    "id": 10,
+    "decricao": "Petisco",
+    "sabor": "Salgado"
+  }
+]
