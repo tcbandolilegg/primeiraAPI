@@ -11,25 +11,25 @@ const allBlogs = (_, response) => {
 
 // request é o que vem do HTTP pra o servidor como uma pergunta através da rota
 const searchBlogForId = (request, response) => {
-  const blogEncontrado = blogs.filter((blog) => {
+  const blogFound = blogs.filter((blog) => {
     return blog.id === Number(request.params.id)
   })
-  if (blogEncontrado.length > 0) {
-    response.status(200).send(blogEncontrado)
+  if (blogFound.length > 0) {
+    response.status(200).send(blogFound)
 
   } else {
-    response.status(404).send("Blog não encontrado")
+    response.status(404).send("Blog not found")
   }
 
 };
 
 const saveBlog = (request, response) => {
 
-  const novoId = Date()
-  const novoUsuario = request.body
+  const newId = Date()
+  const newBlog = request.body
 
   blogs.push(
-    { id: novoId, ...novoUsuario }
+    { id: newId, ...newBlog }
   )
   try {
     fs.writeFile(`${blogsPath}`, JSON.stringify(blogs))
@@ -42,12 +42,12 @@ const saveBlog = (request, response) => {
 
 
 const deleteBlog = (request, response) => {
-  const blogEncontrado = blogs.filter((blog) => {
+  const blogFound = blogs.filter((blog) => {
     return blog.id === Number(request.params.id)
   })
-  if (blogEncontrado.length > 0) {
-    posicao = blogEncontrado.indexOf(blogEncontrado.id);
-    blogs.splice(posicao, 1);
+  if (blogFound.length > 0) {
+    position = blogFound.indexOf(blogFound.id);
+    blogs.splice(position, 1);
     try {
       fs.writeFile(`${blogsPath}`, JSON.stringify(blogs))
       response.status(201).send("Blog Excluído")
@@ -56,7 +56,7 @@ const deleteBlog = (request, response) => {
     }
 
   } else {
-    response.status(404).send("Blog não encontrado")
+    response.status(404).send("Blog not found")
   }
 
 }
@@ -65,16 +65,16 @@ const deleteBlog = (request, response) => {
 
 const upDateBlog = (request, response) => {
 
-  const blogEncontrado = blogs.filter((blog) => {
+  const blogFound = blogs.filter((blog) => {
     return blog.id === Number(request.params.id)
   })
-  if (blogEncontrado.length > 0) {
-    posicao = blogEncontrado.indexOf(blogEncontrado.id);
-    const novoId = blogEncontrado.id
-    blogs.splice(posicao, 1);
-    const novoBlog = request.body
+  if (blogFound.length > 0) {
+    position = blogFound.indexOf(blogFound.id);
+    const newId = blogFound.id
+    blogs.splice(position, 1);
+    const newBlog = request.body
     blogs.push(
-      { id: novoId, ...novoBlog }
+      { id: newId, ...newBlog }
     )
     try {
       fs.writeFile(`${blogsPath}`, JSON.stringify(blogs))

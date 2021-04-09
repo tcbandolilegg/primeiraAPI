@@ -10,25 +10,25 @@ const allRecipes = (_, response) => {
 
 // request é o que vem do HTTP pra o servidor como uma pergunta através da rota
 const searchRecipeForId = (request, response) => {
-  const recipeEncontrado = recipes.filter((recipe) => {
+  const recipeFound = recipes.filter((recipe) => {
     return recipe.id === Number(request.params.id)
   })
-  if (recipeEncontrado.length > 0) {
-    response.status(200).send(recipeEncontrado)
+  if (recipeFound.length > 0) {
+    response.status(200).send(recipeFound)
 
   } else {
-    response.status(404).send("Recipe não encontrado")
+    response.status(404).send("Recipe not found")
   }
 
 };
 
 const saveRecipe = (request, response) => {
 
-  const novoId = Date()
-  const novoUsuario = request.body
+  const newId = Date()
+  const newRecipe = request.body
 
   recipes.push(
-    { id: novoId, ...novoUsuario }
+    { id: newId, ...newRecipe }
   )
 
   try {
@@ -42,12 +42,12 @@ const saveRecipe = (request, response) => {
 
 
 const deleteRecipe = (request, response) => {
-  const recipeEncontrado = recipes.filter((recipe) => {
+  const recipeFound = recipes.filter((recipe) => {
     return recipe.id === Number(request.params.id)
   })
-  if (recipeEncontrado.length > 0) {
-    posicao = recipeEncontrado.indexOf(recipeEncontrado.id);
-    recipes.splice(posicao, 1);
+  if (recipeFound.length > 0) {
+    position = recipeFound.indexOf(recipeFound.id);
+    recipes.splice(position, 1);
     try {
       fs.writeFile(`${recipesPath}`, JSON.stringify(recipes))
       response.status(200).send("Recipe Excluído")
@@ -57,7 +57,7 @@ const deleteRecipe = (request, response) => {
 
 
   } else {
-    response.status(404).send("Recipe não encontrado")
+    response.status(404).send("Recipe not found")
   }
 
 }
@@ -66,16 +66,16 @@ const deleteRecipe = (request, response) => {
 
 const upDateRecipe = (request, response) => {
 
-  const recipeEncontrado = recipes.filter((recipe) => {
+  const recipeFound = recipes.filter((recipe) => {
     return recipe.id === Number(request.params.id)
   })
-  if (recipeEncontrado.length > 0) {
-    posicao = recipeEncontrado.indexOf(recipeEncontrado.id);
-    const novoId = recipeEncontrado.id
-    recipes.splice(posicao, 1);
-    const novoRecipe = request.body
+  if (recipeFound.length > 0) {
+    position = recipeFound.indexOf(recipeFound.id);
+    const newId = recipeFound.id
+    recipes.splice(position, 1);
+    const newRecipe = request.body
     recipes.push(
-      { id: novoId, ...novoRecipe }
+      { id: newId, ...newRecipe }
     )
     try {
       fs.writeFile(`${recipesPath}`, JSON.stringify(recipes))

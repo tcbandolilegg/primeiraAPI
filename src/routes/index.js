@@ -3,8 +3,8 @@ const router = express.Router();
 
 // router.METHOD(caminho, handler)
 
-router.get("/", (request, response) => {
-  response.send("Hello World");
+router.get("/", (req, res) => {
+  res.send("O servidor está no ar");
   console.log('Request URL:', req.originalUrl)
 });
 

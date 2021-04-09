@@ -11,25 +11,25 @@ const allNotebooks = (_, response) => {
 
 // request é o que vem do HTTP pra o servidor como uma pergunta através da rota
 const searchNotebookForId = (request, response) => {
-  const notebookEncontrado = notebooks.filter((notebook) => {
+  const notebookFound = notebooks.filter((notebook) => {
     return notebook.id === Number(request.params.id)
   })
-  if (notebookEncontrado.length > 0) {
-    response.status(200).send(notebookEncontrado)
+  if (notebookFound.length > 0) {
+    response.status(200).send(notebookFound)
 
   } else {
-    response.status(404).send("Notebook não encontrado")
+    response.status(404).send("Notebook not found")
   }
 
 };
 
 const saveNotebook = (request, response) => {
 
-  const novoId = Date()
-  const novoUsuario = request.body
+  const newId = Date()
+  const newNotebook = request.body
 
   notebooks.push(
-    { id: novoId, ...novoUsuario }
+    { id: newId, ...newNotebook }
   )
   try {
     fs.writeFile(`${notebooksPath}`, JSON.stringify(notebooks))
@@ -42,12 +42,12 @@ const saveNotebook = (request, response) => {
 
 
 const deleteNotebook = (request, response) => {
-  const notebookEncontrado = notebooks.filter((notebook) => {
+  const notebookFound = notebooks.filter((notebook) => {
     return notebook.id === Number(request.params.id)
   })
-  if (notebookEncontrado.length > 0) {
-    posicao = notebookEncontrado.indexOf(notebookEncontrado.id);
-    notebooks.splice(posicao, 1);
+  if (notebookFound.length > 0) {
+    position = notebookFound.indexOf(notebookFound.id);
+    notebooks.splice(position, 1);
     try {
       fs.writeFile(`${notebooksPath}`, JSON.stringify(notebooks))
       response.status(200).send("Notebook Excluído")
@@ -56,7 +56,7 @@ const deleteNotebook = (request, response) => {
     }
 
   } else {
-    response.status(404).send("Notebook não encontrado")
+    response.status(404).send("Notebook not found")
   }
 
 }
@@ -65,16 +65,16 @@ const deleteNotebook = (request, response) => {
 
 const upDateNotebook = (request, response) => {
 
-  const notebookEncontrado = notebooks.filter((notebook) => {
+  const notebookFound = notebooks.filter((notebook) => {
     return notebook.id === Number(request.params.id)
   })
-  if (notebookEncontrado.length > 0) {
-    posicao = notebookEncontrado.indexOf(notebookEncontrado.id);
-    const novoId = notebookEncontrado.id
-    notebooks.splice(posicao, 1);
-    const novoNotebook = request.body
+  if (notebookFound.length > 0) {
+    position = notebookFound.indexOf(notebookFound.id);
+    const newId = notebookFound.id
+    notebooks.splice(position, 1);
+    const newNotebook = request.body
     notebooks.push(
-      { id: novoId, ...novoNotebook }
+      { id: newId, ...newNotebook }
     )
 
     try {

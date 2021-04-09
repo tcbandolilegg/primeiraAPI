@@ -10,25 +10,25 @@ const allCategories = (_, response) => {
 
 // request é o que vem do HTTP pra o servidor como uma pergunta através da rota
 const searchCategoryForId = (request, response) => {
-  const categoryEncontrado = categories.filter((category) => {
+  const categoryFound = categories.filter((category) => {
     return category.id === Number(request.params.id)
   })
-  if (categoryEncontrado.length > 0) {
-    response.status(200).send(categoryEncontrado)
+  if (categoryFound.length > 0) {
+    response.status(200).send(categoryFound)
 
   } else {
-    response.status(404).send("Category não encontrado")
+    response.status(404).send("Category not found")
   }
 
 };
 
 const saveCategory = (request, response) => {
 
-  const novoId = Date()
-  const novoUsuario = request.body
+  const newId = Date()
+  const newCategory = request.body
 
   categories.push(
-    { id: novoId, ...novoUsuario }
+    { id: newId, ...newCategory }
   )
   try {
     fs.writeFile(`${categoriesPath}`, JSON.stringify(categories))
@@ -41,12 +41,12 @@ const saveCategory = (request, response) => {
 
 
 const deleteCategory = (request, response) => {
-  const categoryEncontrado = categories.filter((category) => {
+  const categoryFound = categories.filter((category) => {
     return category.id === Number(request.params.id)
   })
-  if (categoryEncontrado.length > 0) {
-    posicao = categoryEncontrado.indexOf(categoryEncontrado.id);
-    categories.splice(posicao, 1);
+  if (categoryFound.length > 0) {
+    position = categoryFound.indexOf(categoryFound.id);
+    categories.splice(position, 1);
     try {
       fs.writeFile(`${categoriesPath}`, JSON.stringify(categories))
       response.status(200).send("Categoria Excluída")
@@ -56,7 +56,7 @@ const deleteCategory = (request, response) => {
 
 
   } else {
-    response.status(404).send("Category não encontrado")
+    response.status(404).send("Category not found")
   }
 
 }
@@ -65,16 +65,16 @@ const deleteCategory = (request, response) => {
 
 const upDateCategory = (request, response) => {
 
-  const categoryEncontrado = categories.filter((category) => {
+  const categoryFound = categories.filter((category) => {
     return category.id === Number(request.params.id)
   })
-  if (categoryEncontrado.length > 0) {
-    posicao = categoryEncontrado.indexOf(categoryEncontrado.id);
-    const novoId = categoryEncontrado.id
-    categories.splice(posicao, 1);
-    const novoCategory = request.body
+  if (categoryFound.length > 0) {
+    position = categoryFound.indexOf(categoryFound.id);
+    const newId = categoryFound.id
+    categories.splice(position, 1);
+    const newCategory = request.body
     categories.push(
-      { id: novoId, ...novoCategory }
+      { id: newId, ...newCategory }
     )
 
     try {
